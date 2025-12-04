@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>HOW — Anastasiia Serdiuchenko</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        :root {
+            --yellow: #FAEE02;
+            --cyan: #00BCD4;
+            --pink: #E91E63;
+            --green: #4CAF50;
+            --text: #1d1d1f;
+            --text-light: #86868b;
+            --white: #fff;
+            --bg-light: #f5f5f7;
+            --shadow: 0 2px 8px rgba(0,0,0,0.04);
+            
+            /* Typography scale based on golden ratio (1.618) from base 16px */
+            --font-xs: 10px;      /* 16 / 1.618 ≈ 9.89 */
+            --font-base: 16px;    /* Base */
+            --font-md: 26px;      /* 16 × 1.618 ≈ 25.89 */
+            --font-lg: 42px;      /* 26 × 1.618 ≈ 42.07 */
+            --font-xl: 68px;      /* 42 × 1.618 ≈ 67.96 */
+            --font-2xl: 110px;    /* 68 × 1.618 ≈ 110.02 */
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--yellow);
+            color: var(--text);
+            line-height: 1.5;
+            font-size: var(--font-base);
+            padding-bottom: 80px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* ===== SITE HEADER (Fixed) ===== */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background: transparent;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        
+        .site-header > * {
+            pointer-events: auto;
+        }
+        
+        .site-header-left,
+        .site-header-right {
+            font-family: 'Baskerville', 'Baskerville Old Face', 'Goudy Old Style', Garamond, 'Times New Roman', serif;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.13em;
+        }
+        
+        .site-header-left {
+            margin-top: 16px;
+            margin-left: 16px;
+        }
+        
+        .site-header-right {
+            margin-top: 16px;
+            margin-right: 16px;
+        }
+        
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            padding: 80px 24px 60px;
+        }
+        
+        .header-title {
+            font-family: 'Baskerville', 'Baskerville Old Face', 'Goudy Old Style', Garamond, 'Times New Roman', serif;
+            font-size: var(--font-2xl);
+            font-weight: 600;
+            letter-spacing: -2px;
+            line-height: 1.2;
+            margin: 0;
+            margin-bottom: 0;
+        }
+        
+        .header-title .subtitle,
+        .header-title .grow {
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+            letter-spacing: inherit;
+        }
+        
+        /* ===== STAR ===== */
+        .header .star {
+            width: 540px;
+            height: 540px;
+            position: relative;
+            margin: 32px auto;
+        }
+        
+        /* vertical line */
+        .header .star::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0) 0%,
+                #1d1d1f 50%,
+                rgba(0,0,0,0) 100%
+            );
+            transform: translateX(-50%);
+        }
+        
+        /* horizontal line */
+        .header .star::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(
+                to right,
+                rgba(0,0,0,0) 0%,
+                #1d1d1f 50%,
+                rgba(0,0,0,0) 100%
+            );
+            transform: translateY(-50%);
+        }
+        
+        /* diagonal wrapper */
+        .header .star .diag {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* +45° line */
+        .header .star .diag::before,
+        .header .star .diag::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0) 0%,
+                #1d1d1f 50%,
+                rgba(0,0,0,0) 100%
+            );
+            transform-origin: center;
+        }
+        
+        .header .star .diag::before {
+            transform: translateX(-50%) rotate(45deg);
+        }
+        
+        /* -45° line */
+        .header .star .diag::after {
+            transform: translateX(-50%) rotate(-45deg);
+        }
+        
+        /* ===== HEADER TITLE AFTER STAR ===== */
+        .header-title-after-star {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 32px;
+            font-weight: 500;
+            text-align: center;
+            margin: 32px 0 0 0;
+            line-height: 1.2;
+        }
+        
+        .header .name {
+            margin-top: 32px;
+            font-size: var(--font-base);
+            font-weight: 500;
+            background: var(--white);
+            padding: 12px 32px;
+            border-radius: 40px;
+            display: inline-block;
+            box-shadow: var(--shadow);
+        }
+        
+        .header .meta {
+            margin-top: 24px;
+            font-size: var(--font-xs);
+            font-weight: 400;
+            color: var(--text-light);
+            letter-spacing: 0.2px;
+        }
+        
+        /* ===== SECTIONS ===== */
+        .section {
+            background: var(--white);
+            margin: 32px 24px;
+            border-radius: 24px;
+            padding: 48px 40px;
+            box-shadow: var(--shadow);
+        }
+        
+        .section-title {
+            font-size: var(--font-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+        
+        .section h2 {
+            font-size: var(--font-lg);
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+        
+        .section h3 {
+            font-size: var(--font-md);
+            font-weight: 600;
+            margin: 40px 0 16px;
+            letter-spacing: -0.5px;
+        }
+        
+        .section p {
+            font-size: var(--font-base);
+            color: var(--text);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        
+        /* ===== RADAR ===== */
+        .radar-container {
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 32px;
+            margin: 32px 0;
+            text-align: center;
+        }
+        
+        .radar-container svg {
+            max-width: 280px;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .radar-legend {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 24px;
+            font-size: var(--font-xs);
+            font-weight: 500;
+        }
+        
+        .radar-legend span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .radar-legend .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .radar-legend .dot.positive {
+            background: var(--cyan);
+        }
+        
+        .radar-legend .dot.negative {
+            background: var(--pink);
+        }
+        
+        /* ===== INTRO BOX ===== */
+        .intro-box {
+            background: var(--bg-light);
+            padding: 32px;
+            border-radius: 20px;
+            margin: 24px 0;
+        }
+        
+        .intro-box h4 {
+            font-size: var(--font-md);
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+        
+        .intro-box p {
+            margin: 0;
+            font-size: var(--font-base);
+            color: var(--text);
+        }
+        
+        /* ===== PORTRAIT ===== */
+        .portrait-text {
+            font-size: var(--font-md);
+            line-height: 1.7;
+            color: var(--text);
+            letter-spacing: -0.2px;
+        }
+        
+        /* ===== SUPERPOWER CARD ===== */
+        .superpower {
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+        
+        .superpower .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .superpower h4 {
+            font-size: var(--font-md);
+            font-weight: 600;
+            flex: 1;
+            letter-spacing: -0.5px;
+        }
+        
+        .superpower .percent {
+            font-size: var(--font-xl);
+            font-weight: 700;
+            color: var(--cyan);
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+        
+        .superpower .desc {
+            font-size: var(--font-base);
+            color: var(--text);
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        /* ===== GROWTH CARD ===== */
+        .growth {
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+        
+        .growth.critical {
+            background: var(--bg-light);
+        }
+        
+        .growth h4 {
+            font-size: var(--font-md);
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .growth .badge {
+            display: inline-block;
+            background: var(--pink);
+            color: var(--white);
+            font-size: var(--font-xs);
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+        
+        .growth.critical .badge {
+            background: var(--pink);
+        }
+        
+        .growth p {
+            margin: 0;
+            font-size: var(--font-base);
+            color: var(--text);
+            line-height: 1.5;
+        }
+        
+        /* ===== QUOTE ===== */
+        .quote {
+            background: var(--bg-light);
+            padding: 24px 32px;
+            border-radius: 20px;
+            margin: 16px 0;
+            font-size: var(--font-md);
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* ===== INSIGHT ===== */
+        .insight {
+            background: var(--bg-light);
+            padding: 48px 32px;
+            border-radius: 20px;
+            margin: 32px 0;
+            text-align: center;
+        }
+        
+        .insight h4 {
+            font-size: var(--font-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            color: var(--text-light);
+        }
+        
+        .insight p {
+            font-size: var(--font-md);
+            color: var(--text);
+            margin: 0;
+            line-height: 1.5;
+            letter-spacing: -0.3px;
+        }
+        
+        /* ===== FRAMEWORK ===== */
+        .framework {
+            margin: 32px 0;
+        }
+        
+        .framework-label {
+            font-size: var(--font-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+        
+        .framework-item {
+            background: var(--bg-light);
+            padding: 20px 24px;
+            border-radius: 16px;
+            margin: 12px 0;
+            font-size: var(--font-base);
+            line-height: 1.5;
+        }
+        
+        /* ===== TOOLS ===== */
+        .tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 24px 0;
+        }
+        
+        .tool {
+            background: var(--bg-light);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: var(--font-base);
+            font-weight: 500;
+        }
+        
+        /* ===== AXES TABLE ===== */
+        .axis-item {
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .axis-item:last-child {
+            border-bottom: none;
+        }
+        
+        .axis-num {
+            width: 32px;
+            height: 32px;
+            background: var(--bg-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: var(--font-base);
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+        
+        .axis-info {
+            flex: 1;
+        }
+        
+        .axis-name {
+            font-weight: 600;
+            font-size: var(--font-md);
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
+        }
+        
+        .axis-stats {
+            font-size: var(--font-base);
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        
+        .axis-badge {
+            font-size: var(--font-xs);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+        
+        .axis-badge.positive {
+            background: var(--bg-light);
+            color: var(--green);
+        }
+        
+        .axis-badge.polar {
+            background: var(--bg-light);
+            color: var(--text);
+        }
+        
+        .axis-badge.negative {
+            background: var(--bg-light);
+            color: var(--pink);
+        }
+        
+        /* ===== DIVIDER ===== */
+        .divider {
+            height: 1px;
+            background: rgba(0,0,0,0.06);
+            margin: 48px 24px;
+        }
+        
+        /* ===== CHECKLIST ===== */
+        .checklist {
+            list-style: none;
+        }
+        
+        .checklist li {
+            padding: 20px 0;
+            font-size: var(--font-base);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist li::before {
+            content: "→";
+            color: var(--text-light);
+            font-weight: 400;
+            margin-right: 16px;
+            font-size: var(--font-md);
+        }
+        
+        /* ===== PLAN ===== */
+        .plan-month {
+            background: var(--bg-light);
+            padding: 32px;
+            border-radius: 20px;
+            margin: 16px 0;
+        }
+        
+        .plan-month h5 {
+            font-size: var(--font-base);
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+        
+        .plan-month p {
+            font-size: var(--font-base);
+            margin: 0;
+            color: var(--text);
+            line-height: 1.5;
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 80px 24px;
+        }
+        
+        .footer .big {
+            font-family: 'Baskerville', 'Baskerville Old Face', 'Goudy Old Style', Garamond, 'Times New Roman', serif;
+            font-size: var(--font-xl);
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+        
+        .footer .small {
+            font-size: var(--font-base);
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 56px;
+            height: 56px;
+            background: var(--white);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-md);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 100;
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+        }
+        
+        /* ===== AXIS HIGHLIGHT ===== */
+        .axis-highlight {
+            background: var(--bg-light);
+            padding: 40px 32px;
+            border-radius: 20px;
+            margin: 32px 0;
+            text-align: center;
+        }
+        
+        .axis-highlight .label {
+            font-size: var(--font-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+        }
+        
+        .axis-highlight .value {
+            font-size: var(--font-xl);
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1;
+            letter-spacing: -3px;
+            margin: 12px 0;
+        }
+        
+        .axis-highlight .sub {
+            font-size: var(--font-base);
+            color: var(--text-light);
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SITE HEADER (Fixed) -->
+    <header class="site-header">
+        <div class="site-header-left">HOW</div>
+        <div class="site-header-right">?</div>
+    </header>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="star">
+            <div class="diag"></div>
+        </div>
+        <h1 class="header-title-after-star">How to grow</h1>
+        <div class="name">Anastasiia Serdiuchenko</div>
+        <div class="meta">HOW v5.7 · 8 респондентів · 03.12.2025</div>
+    </header>
+
+    <!-- INTRO -->
+    <section class="section">
+        <div class="section-title">Вступ</div>
+        <h2>👋 Як читати цей аналіз</h2>
+        
+        <p>Це <strong>не критика</strong>, а можливість побачити себе очима команди.</p>
+        
+        <div class="intro-box">
+            <h4>💪 Суперсили</h4>
+            <p>Те, що робить вас цінним для команди</p>
+        </div>
+        
+        <div class="intro-box">
+            <h4>🎯 Зони розвитку</h4>
+            <p>Не недоліки, а точки росту</p>
+        </div>
+        
+        <p style="text-align:center; font-weight:600; margin-top:32px;">
+            Команда вірить у вас 💫
+        </p>
+    </section>
+
+    <!-- PORTRAIT -->
+    <section class="section">
+        <div class="section-title">Портрет</div>
+        <h2>👤 Хто ви для команди</h2>
+        <p class="portrait-text">Анастасія — це енергетичний центр команди, яка поєднує професійну глибину з позитивною енергією та відкритістю до людей. 
+
+Її здатність створювати дружню атмосферу (88% команди) та легко знаходити спільну мову з усіма (75%) роблять її справжньою душею колективу. Професійна інтуїція та уважність до деталей забезпечують високу якість роботи — вона знаходить баги там, де інші їх не бачать.
+
+Головний виклик — баланс між глибоким зануренням у проект та дотриманням процесів: іноді інтуїтивний підхід призводить до виходу за рамки завдань або ігнорування блокерів. Це зворотна сторона її сильної сторони — прагнення докопатися до суті.</p>
+        
+        <div class="insight">
+            <h4>🔑 Ключовий інсайт</h4>
+            <p>Анастасія — енергетичний центр команди, який поєднує професійну глибину з позитивною атмосферою. Її інтуїція та занурення в деталі забезпечують якість, але потребують балансу з дотриманням процесів.</p>
+        </div>
+    </section>
+
+    <!-- FULL RADAR -->
+    <section class="section">
+        <div class="section-title">Загальний профіль</div>
+        <h2>📊 Радар-чарт</h2>
+        
+        <div class="radar-container">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto;">
+    <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- Фон -->
+    <circle cx="150.0" cy="150.0" r="27.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="55.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="82.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="110.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <line x1="150.0" y1="150.0" x2="150.0" y2="40.0" stroke="#86868b" stroke-width="1"/>
+<text x="150.0" y="15.0" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Позитивна ...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="95.0" stroke="#86868b" stroke-width="1"/>
+<text x="266.9134295108992" y="82.50000000000001" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Комунікабе...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="205.0" stroke="#86868b" stroke-width="1"/>
+<text x="266.9134295108992" y="217.5" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Професійна...</text>
+<line x1="150.0" y1="150.0" x2="150.0" y2="260.0" stroke="#86868b" stroke-width="1"/>
+<text x="150.0" y="285.0" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Уважність ...</text>
+<line x1="150.0" y1="150.0" x2="54.73720558371174" y2="205.0" stroke="#86868b" stroke-width="1"/>
+<text x="33.08657048910078" y="217.5" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Харизма та...</text>
+<line x1="150.0" y1="150.0" x2="54.737205583711756" y2="94.99999999999999" stroke="#86868b" stroke-width="1"/>
+<text x="33.086570489100794" y="82.49999999999999" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Дотримання...</text>
+<polygon points="150.0,53.75 221.4470958122162,108.75 209.53924651018016,184.375 150.0,218.75 126.18430139592793,163.75 150.0,150.0" fill="#00BCD4" fill-opacity="0.3" stroke="#00BCD4" stroke-width="2"/>
+<circle cx="150.0" cy="53.75" r="5" fill="#00BCD4" />
+<circle cx="221.4470958122162" cy="108.75" r="5" fill="#00BCD4" />
+<circle cx="209.53924651018016" cy="184.375" r="5" fill="#00BCD4" />
+<circle cx="150.0" cy="218.75" r="5" fill="#00BCD4" />
+<circle cx="126.18430139592793" cy="163.75" r="5" fill="#00BCD4" />
+<circle cx="150.0" cy="150.0" r="5" fill="#00BCD4" />
+<polygon points="150.0,150.0 150.0,150.0 150.0,150.0 150.0,150.0 138.09215069796397,156.875 114.2764520938919,129.375" fill="#E91E63" fill-opacity="0.2" stroke="#E91E63" stroke-width="2" stroke-dasharray="5,3"/>
+<circle cx="138.09215069796397" cy="156.875" r="4" fill="#E91E63"/>
+<circle cx="114.2764520938919" cy="129.375" r="4" fill="#E91E63"/>
+</svg>
+            <div class="radar-legend">
+                <span><span class="dot positive"></span> Позитив</span>
+                <span><span class="dot negative"></span> Негатив</span>
+            </div>
+        </div>
+        
+        <p style="font-size:var(--font-base); text-align:center; color:var(--text-light);">
+            Чим далі від центру — тим більше респондентів відзначили
+        </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- SUPERPOWERS OVERVIEW -->
+    <section class="section">
+        <div class="section-title">Суперсили</div>
+        <h2>💪 Ваші сильні сторони</h2>
+
+        <div class="superpower">
+            <div class="card-header">
+                <h4>🌟 Позитивна енергія та атмосфера</h4>
+                <span class="percent">88%</span>
+            </div>
+            <p class="desc">Створює позитивну атмосферу, знімає напруження гумором, душа команди</p>
+        </div>
+
+        <div class="superpower">
+            <div class="card-header">
+                <h4>🌟 Комунікабельність та відкритість</h4>
+                <span class="percent">75%</span>
+            </div>
+            <p class="desc">Легко знаходить спільну мову, відкрита до спілкування, готова допомогти</p>
+        </div>
+
+        <div class="superpower">
+            <div class="card-header">
+                <h4>🌟 Професійна інтуїція та глибина</h4>
+                <span class="percent">62%</span>
+            </div>
+            <p class="desc">Глибоко занурюється в проект, знаходить неочевидні проблеми, має інтуїцію</p>
+        </div>
+
+        <div class="superpower">
+            <div class="card-header">
+                <h4>🌟 Уважність та системність</h4>
+                <span class="percent">62%</span>
+            </div>
+            <p class="desc">Уважна до деталей, систематична, відповідальна, структурована</p>
+        </div>
+
+    </section>
+
+    <!-- GROWTH AREAS OVERVIEW -->
+    <section class="section">
+        <div class="section-title">Зони розвитку</div>
+        <h2>🎯 Над чим працювати</h2>
+
+        <div class="growth critical">
+            <span class="badge">КРИТИЧНО · 38%</span>
+            <h4>🔴 Дотримання процесів</h4>
+            <p style="margin:0;">Команда відзначає, що ви часто не дотримуєтесь встановлених процесів, продовжуєте тестування при бло...</p>
+        </div>
+
+        <div class="growth ">
+            <span class="badge">ВАЖЛИВО · 12%</span>
+            <h4>🟡 Харизма та прямота</h4>
+            <p style="margin:0;">Іноді пряма комунікація сприймається як різкість. Це зворотна сторона вашої харизми — впевненість ін...</p>
+        </div>
+
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ALL AXES TABLE -->
+    <section class="section">
+        <div class="section-title">Повний список</div>
+        <h2>📈 Фундаментальні осі</h2>
+
+        <div class="axis-item">
+            <div class="axis-num">1</div>
+            <div class="axis-info">
+                <div class="axis-name">Позитивна енергія та атмосфера</div>
+                <div class="axis-stats">88% позитив</div>
+            </div>
+            <span class="axis-badge positive">✅</span>
+        </div>
+
+        <div class="axis-item">
+            <div class="axis-num">2</div>
+            <div class="axis-info">
+                <div class="axis-name">Комунікабельність та відкритість</div>
+                <div class="axis-stats">75% позитив</div>
+            </div>
+            <span class="axis-badge positive">✅</span>
+        </div>
+
+        <div class="axis-item">
+            <div class="axis-num">3</div>
+            <div class="axis-info">
+                <div class="axis-name">Професійна інтуїція та глибина</div>
+                <div class="axis-stats">62% позитив</div>
+            </div>
+            <span class="axis-badge positive">✅</span>
+        </div>
+
+        <div class="axis-item">
+            <div class="axis-num">4</div>
+            <div class="axis-info">
+                <div class="axis-name">Уважність та системність</div>
+                <div class="axis-stats">62% позитив</div>
+            </div>
+            <span class="axis-badge positive">✅</span>
+        </div>
+
+        <div class="axis-item">
+            <div class="axis-num">5</div>
+            <div class="axis-info">
+                <div class="axis-name">Харизма та прямота</div>
+                <div class="axis-stats">25%+ / 12%−</div>
+            </div>
+            <span class="axis-badge polar">⚖️</span>
+        </div>
+
+        <div class="axis-item">
+            <div class="axis-num">6</div>
+            <div class="axis-info">
+                <div class="axis-name">Дотримання процесів</div>
+                <div class="axis-stats">38% негатив</div>
+            </div>
+            <span class="axis-badge negative">📕</span>
+        </div>
+
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- AXIS 1: Позитивна енергія та атмосфера -->
+    <section class="section">
+        <div class="section-title">Суперсила · Вісь 1/6</div>
+        <h2>🌟 Позитивна енергія та атмосфера</h2>
+        
+        <!-- Радар з підсвіткою цієї осі -->
+        <div class="radar-container">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto;">
+    <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- Фон -->
+    <circle cx="150.0" cy="150.0" r="27.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="55.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="82.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="110.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <line x1="150.0" y1="150.0" x2="150.0" y2="40.0" stroke="#00BCD4" stroke-width="2"/>
+<text x="150.0" y="15.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#00838F" dominant-baseline="middle">Позитивна ...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="95.0" stroke="#86868b" stroke-width="1"/>
+<text x="266.9134295108992" y="82.50000000000001" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Комунікабе...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="205.0" stroke="#86868b" stroke-width="1"/>
+<text x="266.9134295108992" y="217.5" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Професійна...</text>
+<line x1="150.0" y1="150.0" x2="150.0" y2="260.0" stroke="#86868b" stroke-width="1"/>
+<text x="150.0" y="285.0" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Уважність ...</text>
+<line x1="150.0" y1="150.0" x2="54.73720558371174" y2="205.0" stroke="#86868b" stroke-width="1"/>
+<text x="33.08657048910078" y="217.5" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Харизма та...</text>
+<line x1="150.0" y1="150.0" x2="54.737205583711756" y2="94.99999999999999" stroke="#86868b" stroke-width="1"/>
+<text x="33.086570489100794" y="82.49999999999999" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Дотримання...</text>
+<polygon points="150.0,53.75 221.4470958122162,108.75 209.53924651018016,184.375 150.0,218.75 126.18430139592793,163.75 150.0,150.0" fill="#00BCD4" fill-opacity="0.3" stroke="#00BCD4" stroke-width="2"/>
+<circle cx="150.0" cy="53.75" r="8" fill="#00838F" filter="url(#glow)"/>
+<circle cx="221.4470958122162" cy="108.75" r="5" fill="#00BCD4" />
+<circle cx="209.53924651018016" cy="184.375" r="5" fill="#00BCD4" />
+<circle cx="150.0" cy="218.75" r="5" fill="#00BCD4" />
+<circle cx="126.18430139592793" cy="163.75" r="5" fill="#00BCD4" />
+<circle cx="150.0" cy="150.0" r="5" fill="#00BCD4" />
+<polygon points="150.0,150.0 150.0,150.0 150.0,150.0 150.0,150.0 138.09215069796397,156.875 114.2764520938919,129.375" fill="#E91E63" fill-opacity="0.2" stroke="#E91E63" stroke-width="2" stroke-dasharray="5,3"/>
+<circle cx="138.09215069796397" cy="156.875" r="4" fill="#E91E63"/>
+<circle cx="114.2764520938919" cy="129.375" r="4" fill="#E91E63"/>
+<circle cx="150.0" cy="53.75" r="15" fill="none" stroke="#00BCD4" stroke-width="3" opacity="0.5"/>
+</svg>
+        </div>
+        
+        <!-- Показник -->
+        <div class="axis-highlight">
+            <div class="label">Позитив</div>
+            <div class="value">88%</div>
+            <div class="sub">7 з 8 респондентів</div>
+        </div>
+        
+        <p>Створює позитивну атмосферу, знімає напруження гумором, душа команди</p>
+<h3>Що кажуть колеги:</h3>
+<div class="quote">душа команды</div>
+<div class="quote">У спілкуванні вносить легкість і гумор, знімає напруження</div>
+<div class="quote">позитивный взгляд на проблемы</div>
+<h3>Як розвивати:</h3>
+<div class="framework-item">✅ Формалізуйте роль Team Mood Champion — Візьміть на себе відповідальність за емоційний клімат: організуйте короткі ретро про атмосферу, пропонуйте командні активності</div>
+<div class="framework-item">✅ Створіть "банк позитиву" — Збирайте смішні моменти, успішні кейси команди, щоб ділитися ними в складні періоди</div>
+<div class="framework-item">✅ Менторство для новачків — Допомагайте новим членам команди адаптуватися — ваша відкритість робить це природним</div>
+
+        <div class="insight">
+            <h4>💡 Чому важливо</h4>
+            <p>Позитивна атмосфера безпосередньо впливає на продуктивність команди. Коли люди почуваються комфортно, вони краще комунікують, швидше вирішують проблем...</p>
+        </div>
+
+    </section>
+
+    <!-- AXIS 2: Комунікабельність та відкритість -->
+    <section class="section">
+        <div class="section-title">Суперсила · Вісь 2/6</div>
+        <h2>🌟 Комунікабельність та відкритість</h2>
+        
+        <!-- Радар з підсвіткою цієї осі -->
+        <div class="radar-container">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto;">
+    <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- Фон -->
+    <circle cx="150.0" cy="150.0" r="27.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="55.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="82.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="110.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <line x1="150.0" y1="150.0" x2="150.0" y2="40.0" stroke="#86868b" stroke-width="1"/>
+<text x="150.0" y="15.0" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Позитивна ...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="95.0" stroke="#00BCD4" stroke-width="2"/>
+<text x="266.9134295108992" y="82.50000000000001" text-anchor="middle" font-size="11" font-weight="bold" fill="#00838F" dominant-baseline="middle">Комунікабе...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="205.0" stroke="#86868b" stroke-width="1"/>
+<text x="266.9134295108992" y="217.5" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Професійна...</text>
+<line x1="150.0" y1="150.0" x2="150.0" y2="260.0" stroke="#86868b" stroke-width="1"/>
+<text x="150.0" y="285.0" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Уважність ...</text>
+<line x1="150.0" y1="150.0" x2="54.73720558371174" y2="205.0" stroke="#86868b" stroke-width="1"/>
+<text x="33.08657048910078" y="217.5" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Харизма та...</text>
+<line x1="150.0" y1="150.0" x2="54.737205583711756" y2="94.99999999999999" stroke="#86868b" stroke-width="1"/>
+<text x="33.086570489100794" y="82.49999999999999" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Дотримання...</text>
+<polygon points="150.0,53.75 221.4470958122162,108.75 209.53924651018016,184.375 150.0,218.75 126.18430139592793,163.75 150.0,150.0" fill="#00BCD4" fill-opacity="0.3" stroke="#00BCD4" stroke-width="2"/>
+<circle cx="150.0" cy="53.75" r="5" fill="#00BCD4" />
+<circle cx="221.4470958122162" cy="108.75" r="8" fill="#00838F" filter="url(#glow)"/>
+<circle cx="209.53924651018016" cy="184.375" r="5" fill="#00BCD4" />
+<circle cx="150.0" cy="218.75" r="5" fill="#00BCD4" />
+<circle cx="126.18430139592793" cy="163.75" r="5" fill="#00BCD4" />
+<circle cx="150.0" cy="150.0" r="5" fill="#00BCD4" />
+<polygon points="150.0,150.0 150.0,150.0 150.0,150.0 150.0,150.0 138.09215069796397,156.875 114.2764520938919,129.375" fill="#E91E63" fill-opacity="0.2" stroke="#E91E63" stroke-width="2" stroke-dasharray="5,3"/>
+<circle cx="138.09215069796397" cy="156.875" r="4" fill="#E91E63"/>
+<circle cx="114.2764520938919" cy="129.375" r="4" fill="#E91E63"/>
+<circle cx="221.4470958122162" cy="108.75" r="15" fill="none" stroke="#00BCD4" stroke-width="3" opacity="0.5"/>
+</svg>
+        </div>
+        
+        <!-- Показник -->
+        <div class="axis-highlight">
+            <div class="label">Позитив</div>
+            <div class="value">75%</div>
+            <div class="sub">6 з 8 респондентів</div>
+        </div>
+        
+        <p>Легко знаходить спільну мову, відкрита до спілкування, готова допомогти</p>
+<h3>Що кажуть колеги:</h3>
+<div class="quote">умение найти общий язык со всеми</div>
+<div class="quote">никогда не откажет в помощи</div>
+<div class="quote">Легко вовлекает в разговор</div>
+<h3>Як розвивати:</h3>
+<div class="framework-item">✅ Станьте точкою збору інформації — Ваша природна комунікабельність дозволяє збирати інсайти від усіх — діліться узагальненнями з менеджментом</div>
+<div class="framework-item">✅ Фасилітуйте складні обговорення — Беріть на себе роль модератора на мітингах, де є конфлікти або непорозуміння</div>
+<div class="framework-item">✅ Розвивайте письмову комунікацію — Документуйте знання — ваш досвід буде корисним для команди навіть коли вас немає</div>
+
+        <div class="insight">
+            <h4>💡 Чому важливо</h4>
+            <p>Комунікація — це основа ефективної роботи. Ваша здатність будувати мости між людьми зменшує непорозуміння, прискорює вирішення проблем та створює дові...</p>
+        </div>
+
+    </section>
+
+    <!-- AXIS 3: Професійна інтуїція та глибина -->
+    <section class="section">
+        <div class="section-title">Суперсила · Вісь 3/6</div>
+        <h2>🌟 Професійна інтуїція та глибина</h2>
+        
+        <!-- Радар з підсвіткою цієї осі -->
+        <div class="radar-container">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto;">
+    <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- Фон -->
+    <circle cx="150.0" cy="150.0" r="27.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="55.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="82.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="110.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <line x1="150.0" y1="150.0" x2="150.0" y2="40.0" stroke="#86868b" stroke-width="1"/>
+<text x="150.0" y="15.0" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Позитивна ...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="95.0" stroke="#86868b" stroke-width="1"/>
+<text x="266.9134295108992" y="82.50000000000001" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Комунікабе...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="205.0" stroke="#00BCD4" stroke-width="2"/>
+<text x="266.9134295108992" y="217.5" text-anchor="middle" font-size="11" font-weight="bold" fill="#00838F" dominant-baseline="middle">Професійна...</text>
+<line x1="150.0" y1="150.0" x2="150.0" y2="260.0" stroke="#86868b" stroke-width="1"/>
+<text x="150.0" y="285.0" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Уважність ...</text>
+<line x1="150.0" y1="150.0" x2="54.73720558371174" y2="205.0" stroke="#86868b" stroke-width="1"/>
+<text x="33.08657048910078" y="217.5" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Харизма та...</text>
+<line x1="150.0" y1="150.0" x2="54.737205583711756" y2="94.99999999999999" stroke="#86868b" stroke-width="1"/>
+<text x="33.086570489100794" y="82.49999999999999" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Дотримання...</text>
+<polygon points="150.0,53.75 221.4470958122162,108.75 209.53924651018016,184.375 150.0,218.75 126.18430139592793,163.75 150.0,150.0" fill="#00BCD4" fill-opacity="0.3" stroke="#00BCD4" stroke-width="2"/>
+<circle cx="150.0" cy="53.75" r="5" fill="#00BCD4" />
+<circle cx="221.4470958122162" cy="108.75" r="5" fill="#00BCD4" />
+<circle cx="209.53924651018016" cy="184.375" r="8" fill="#00838F" filter="url(#glow)"/>
+<circle cx="150.0" cy="218.75" r="5" fill="#00BCD4" />
+<circle cx="126.18430139592793" cy="163.75" r="5" fill="#00BCD4" />
+<circle cx="150.0" cy="150.0" r="5" fill="#00BCD4" />
+<polygon points="150.0,150.0 150.0,150.0 150.0,150.0 150.0,150.0 138.09215069796397,156.875 114.2764520938919,129.375" fill="#E91E63" fill-opacity="0.2" stroke="#E91E63" stroke-width="2" stroke-dasharray="5,3"/>
+<circle cx="138.09215069796397" cy="156.875" r="4" fill="#E91E63"/>
+<circle cx="114.2764520938919" cy="129.375" r="4" fill="#E91E63"/>
+<circle cx="209.53924651018016" cy="184.375" r="15" fill="none" stroke="#00BCD4" stroke-width="3" opacity="0.5"/>
+</svg>
+        </div>
+        
+        <!-- Показник -->
+        <div class="axis-highlight">
+            <div class="label">Позитив</div>
+            <div class="value">62%</div>
+            <div class="sub">5 з 8 респондентів</div>
+        </div>
+        
+        <p>Глибоко занурюється в проект, знаходить неочевидні проблеми, має інтуїцію</p>
+<h3>Що кажуть колеги:</h3>
+<div class="quote">Чувствует баги нутром</div>
+<div class="quote">находит те баги, что сразу не очевидны</div>
+<div class="quote">придумывает нетипичные и редкие кейсы</div>
+<h3>Як розвивати:</h3>
+<div class="framework-item">✅ Документуйте свої "інтуїтивні" знахідки — Записуйте, як ви знайшли баг: що підказало, які паттерни помітили. Це допоможе передати досвід іншим</div>
+<div class="framework-item">✅ Створіть базу нестандартних кейсів — Зберіть свої найкреативніші тест-кейси в бібліотеку для команди</div>
+<div class="framework-item">✅ Проводіть воркшопи "Bug Hunting" — Навчайте колег своєму підходу до пошуку багів — це підвищить загальну якість</div>
+
+        <div class="insight">
+            <h4>💡 Чому важливо</h4>
+            <p>Ваша інтуїція — це унікальний актив. Ви знаходите критичні баги до того, як вони потраплять у продакшн, що економить час команди та гроші компанії. Це...</p>
+        </div>
+
+    </section>
+
+    <!-- AXIS 4: Уважність та системність -->
+    <section class="section">
+        <div class="section-title">Суперсила · Вісь 4/6</div>
+        <h2>🌟 Уважність та системність</h2>
+        
+        <!-- Радар з підсвіткою цієї осі -->
+        <div class="radar-container">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto;">
+    <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- Фон -->
+    <circle cx="150.0" cy="150.0" r="27.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="55.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="82.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="110.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <line x1="150.0" y1="150.0" x2="150.0" y2="40.0" stroke="#86868b" stroke-width="1"/>
+<text x="150.0" y="15.0" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Позитивна ...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="95.0" stroke="#86868b" stroke-width="1"/>
+<text x="266.9134295108992" y="82.50000000000001" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Комунікабе...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="205.0" stroke="#86868b" stroke-width="1"/>
+<text x="266.9134295108992" y="217.5" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Професійна...</text>
+<line x1="150.0" y1="150.0" x2="150.0" y2="260.0" stroke="#00BCD4" stroke-width="2"/>
+<text x="150.0" y="285.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#00838F" dominant-baseline="middle">Уважність ...</text>
+<line x1="150.0" y1="150.0" x2="54.73720558371174" y2="205.0" stroke="#86868b" stroke-width="1"/>
+<text x="33.08657048910078" y="217.5" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Харизма та...</text>
+<line x1="150.0" y1="150.0" x2="54.737205583711756" y2="94.99999999999999" stroke="#86868b" stroke-width="1"/>
+<text x="33.086570489100794" y="82.49999999999999" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Дотримання...</text>
+<polygon points="150.0,53.75 221.4470958122162,108.75 209.53924651018016,184.375 150.0,218.75 126.18430139592793,163.75 150.0,150.0" fill="#00BCD4" fill-opacity="0.3" stroke="#00BCD4" stroke-width="2"/>
+<circle cx="150.0" cy="53.75" r="5" fill="#00BCD4" />
+<circle cx="221.4470958122162" cy="108.75" r="5" fill="#00BCD4" />
+<circle cx="209.53924651018016" cy="184.375" r="5" fill="#00BCD4" />
+<circle cx="150.0" cy="218.75" r="8" fill="#00838F" filter="url(#glow)"/>
+<circle cx="126.18430139592793" cy="163.75" r="5" fill="#00BCD4" />
+<circle cx="150.0" cy="150.0" r="5" fill="#00BCD4" />
+<polygon points="150.0,150.0 150.0,150.0 150.0,150.0 150.0,150.0 138.09215069796397,156.875 114.2764520938919,129.375" fill="#E91E63" fill-opacity="0.2" stroke="#E91E63" stroke-width="2" stroke-dasharray="5,3"/>
+<circle cx="138.09215069796397" cy="156.875" r="4" fill="#E91E63"/>
+<circle cx="114.2764520938919" cy="129.375" r="4" fill="#E91E63"/>
+<circle cx="150.0" cy="218.75" r="15" fill="none" stroke="#00BCD4" stroke-width="3" opacity="0.5"/>
+</svg>
+        </div>
+        
+        <!-- Показник -->
+        <div class="axis-highlight">
+            <div class="label">Позитив</div>
+            <div class="value">62%</div>
+            <div class="sub">5 з 8 респондентів</div>
+        </div>
+        
+        <p>Уважна до деталей, систематична, відповідальна, структурована</p>
+<h3>Що кажуть колеги:</h3>
+<div class="quote">уважна до деталей, систематична</div>
+<div class="quote">терпеливо готова перевіряти одне й те саме</div>
+<div class="quote">щепетильно относится к проверке проектов</div>
+<h3>Як розвивати:</h3>
+<div class="framework-item">✅ Стандартизуйте свій підхід — Опишіть свої чек-листи та процеси так, щоб інші могли їх використовувати</div>
+<div class="framework-item">✅ Автоматизуйте рутину — Використайте свою системність для створення автоматизованих тестів — це масштабує вашу силу</div>
+<div class="framework-item">✅ Ревьюйте процеси команди — Пропонуйте покращення робочих процесів — ваш погляд на деталі допоможе знайти слабкі місця</div>
+
+        <div class="insight">
+            <h4>💡 Чому важливо</h4>
+            <p>Системність та увага до деталей — це фундамент якості. Завдяки вам команда може бути впевнена, що нічого не буде пропущено. Це створює довіру до проце...</p>
+        </div>
+
+    </section>
+
+    <!-- AXIS 5: Харизма та прямота -->
+    <section class="section">
+        <div class="section-title">Полярна вісь · Вісь 5/6</div>
+        <h2>⚖️ Харизма та прямота</h2>
+        
+        <!-- Радар з підсвіткою цієї осі -->
+        <div class="radar-container">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto;">
+    <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- Фон -->
+    <circle cx="150.0" cy="150.0" r="27.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="55.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="82.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="110.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <line x1="150.0" y1="150.0" x2="150.0" y2="40.0" stroke="#86868b" stroke-width="1"/>
+<text x="150.0" y="15.0" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Позитивна ...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="95.0" stroke="#86868b" stroke-width="1"/>
+<text x="266.9134295108992" y="82.50000000000001" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Комунікабе...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="205.0" stroke="#86868b" stroke-width="1"/>
+<text x="266.9134295108992" y="217.5" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Професійна...</text>
+<line x1="150.0" y1="150.0" x2="150.0" y2="260.0" stroke="#86868b" stroke-width="1"/>
+<text x="150.0" y="285.0" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Уважність ...</text>
+<line x1="150.0" y1="150.0" x2="54.73720558371174" y2="205.0" stroke="#00BCD4" stroke-width="2"/>
+<text x="33.08657048910078" y="217.5" text-anchor="middle" font-size="11" font-weight="bold" fill="#00838F" dominant-baseline="middle">Харизма та...</text>
+<line x1="150.0" y1="150.0" x2="54.737205583711756" y2="94.99999999999999" stroke="#86868b" stroke-width="1"/>
+<text x="33.086570489100794" y="82.49999999999999" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Дотримання...</text>
+<polygon points="150.0,53.75 221.4470958122162,108.75 209.53924651018016,184.375 150.0,218.75 126.18430139592793,163.75 150.0,150.0" fill="#00BCD4" fill-opacity="0.3" stroke="#00BCD4" stroke-width="2"/>
+<circle cx="150.0" cy="53.75" r="5" fill="#00BCD4" />
+<circle cx="221.4470958122162" cy="108.75" r="5" fill="#00BCD4" />
+<circle cx="209.53924651018016" cy="184.375" r="5" fill="#00BCD4" />
+<circle cx="150.0" cy="218.75" r="5" fill="#00BCD4" />
+<circle cx="126.18430139592793" cy="163.75" r="8" fill="#00838F" filter="url(#glow)"/>
+<circle cx="150.0" cy="150.0" r="5" fill="#00BCD4" />
+<polygon points="150.0,150.0 150.0,150.0 150.0,150.0 150.0,150.0 138.09215069796397,156.875 114.2764520938919,129.375" fill="#E91E63" fill-opacity="0.2" stroke="#E91E63" stroke-width="2" stroke-dasharray="5,3"/>
+<circle cx="138.09215069796397" cy="156.875" r="6" fill="#E91E63"/>
+<circle cx="114.2764520938919" cy="129.375" r="4" fill="#E91E63"/>
+<circle cx="126.18430139592793" cy="163.75" r="15" fill="none" stroke="#00BCD4" stroke-width="3" opacity="0.5"/>
+</svg>
+        </div>
+        
+        <!-- Показник -->
+        <div class="axis-highlight">
+            <div class="label">Позитив</div>
+            <div class="value">25%</div>
+            <div class="sub">2 з 8 респондентів</div>
+        </div>
+        
+        <p>Харизматична, впевнено відстоює думку, але іноді може бути різкою</p>
+<h3>Що кажуть колеги:</h3>
+<div class="quote">харизма</div>
+<div class="quote">вміє аргументовано відстоювати свою думку</div>
+<div class="quote">иногда резка в выражениях (но это часть харизмы)))</div>
+<div class="framework">
+            <span class="framework-label">1️⃣ СЕРЕДОВИЩЕ</span>
+<div class="framework-item">Пауза перед відповіддю — У емоційних ситуаціях — 3 глибоких вдихи перед відповіддю</div>
+<div class="framework-item">Письмова комунікація як буфер — У складних ситуаціях краще написати, ніж сказати одразу — є час перечитати</div>
+</div>
+<div class="framework">
+            <span class="framework-label">2️⃣ СИСТЕМА</span>
+<div class="framework-item">Фідбек-сендвіч — Структура: позитив → критика → позитив/рішення</div>
+<div class="framework-item">Перефразування — Перед критикою: "Я правильно розумію, що ти маєш на увазі...?"</div>
+</div>
+<div class="framework">
+            <span class="framework-label">3️⃣ ЗВИЧКА</span>
+<div class="framework-item">"Як я звучу?" — Після важливих розмов запитати себе: "Як це прозвучало для іншої людини?"</div>
+</div>
+<h3>🛠️ Інструменти</h3>
+<div class="tools">
+<span class="tool">Практика активного слухання</span>
+<span class="tool">Запис важливих розмов (з дозволу) для самоаналізу</span>
+</div>
+
+    </section>
+
+    <!-- AXIS 6: Дотримання процесів -->
+    <section class="section">
+        <div class="section-title">Зона розвитку · Вісь 6/6</div>
+        <h2>🔴 Дотримання процесів</h2>
+        
+        <!-- Радар з підсвіткою цієї осі -->
+        <div class="radar-container">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto;">
+    <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- Фон -->
+    <circle cx="150.0" cy="150.0" r="27.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="55.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="82.5" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <circle cx="150.0" cy="150.0" r="110.0" fill="none" stroke="#86868b" stroke-width="1" opacity="0.3"/>
+    <line x1="150.0" y1="150.0" x2="150.0" y2="40.0" stroke="#86868b" stroke-width="1"/>
+<text x="150.0" y="15.0" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Позитивна ...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="95.0" stroke="#86868b" stroke-width="1"/>
+<text x="266.9134295108992" y="82.50000000000001" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Комунікабе...</text>
+<line x1="150.0" y1="150.0" x2="245.26279441628827" y2="205.0" stroke="#86868b" stroke-width="1"/>
+<text x="266.9134295108992" y="217.5" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Професійна...</text>
+<line x1="150.0" y1="150.0" x2="150.0" y2="260.0" stroke="#86868b" stroke-width="1"/>
+<text x="150.0" y="285.0" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Уважність ...</text>
+<line x1="150.0" y1="150.0" x2="54.73720558371174" y2="205.0" stroke="#86868b" stroke-width="1"/>
+<text x="33.08657048910078" y="217.5" text-anchor="middle" font-size="9" font-weight="normal" fill="#666" dominant-baseline="middle">Харизма та...</text>
+<line x1="150.0" y1="150.0" x2="54.737205583711756" y2="94.99999999999999" stroke="#00BCD4" stroke-width="2"/>
+<text x="33.086570489100794" y="82.49999999999999" text-anchor="middle" font-size="11" font-weight="bold" fill="#00838F" dominant-baseline="middle">Дотримання...</text>
+<polygon points="150.0,53.75 221.4470958122162,108.75 209.53924651018016,184.375 150.0,218.75 126.18430139592793,163.75 150.0,150.0" fill="#00BCD4" fill-opacity="0.3" stroke="#00BCD4" stroke-width="2"/>
+<circle cx="150.0" cy="53.75" r="5" fill="#00BCD4" />
+<circle cx="221.4470958122162" cy="108.75" r="5" fill="#00BCD4" />
+<circle cx="209.53924651018016" cy="184.375" r="5" fill="#00BCD4" />
+<circle cx="150.0" cy="218.75" r="5" fill="#00BCD4" />
+<circle cx="126.18430139592793" cy="163.75" r="5" fill="#00BCD4" />
+<circle cx="150.0" cy="150.0" r="8" fill="#00838F" filter="url(#glow)"/>
+<polygon points="150.0,150.0 150.0,150.0 150.0,150.0 150.0,150.0 138.09215069796397,156.875 114.2764520938919,129.375" fill="#E91E63" fill-opacity="0.2" stroke="#E91E63" stroke-width="2" stroke-dasharray="5,3"/>
+<circle cx="138.09215069796397" cy="156.875" r="4" fill="#E91E63"/>
+<circle cx="114.2764520938919" cy="129.375" r="6" fill="#E91E63"/>
+<circle cx="150.0" cy="150.0" r="15" fill="none" stroke="#00BCD4" stroke-width="3" opacity="0.5"/>
+</svg>
+        </div>
+        
+        <!-- Показник -->
+        <div class="axis-highlight">
+            <div class="label">Негатив</div>
+            <div class="value">38%</div>
+            <div class="sub">3 з 8 респондентів</div>
+        </div>
+        
+        <p>Не завжди дотримується встановлених процесів, виходить за рамки завдань</p>
+<h3>Що кажуть колеги:</h3>
+<div class="quote">Очень часто не следует установленным процессам</div>
+<div class="quote">Часто не останавливается во время тестирования, когда возникает блокер, что порождает тьму выписанных не нужных багов</div>
+<div class="quote">іноді більше розписувати в чому саме проблема</div>
+<div class="framework">
+            <span class="framework-label">1️⃣ СЕРЕДОВИЩЕ</span>
+<div class="framework-item">Чек-лист "Перед початком тестування" — Пункт 1: Чи є блокери? Пункт 2: Що входить у scope? Пункт 3: Критерії завершення</div>
+<div class="framework-item">Візуалізація scope на робочому столі — Список того, що ВХОДИТЬ у завдання — завжди перед очима</div>
+</div>
+<div class="framework">
+            <span class="framework-label">2️⃣ СИСТЕМА</span>
+<div class="framework-item">Правило "СТОП при блокері" — Якщо знайшли блокер — зупинитись, повідомити PM, і НЕ продовжувати тестування поки не буде рішення</div>
+<div class="framework-item">Sync з PM перед великим тестуванням — 5 хвилин на початку: "Правильно розумію scope? Що в пріоритеті? Де межі?"</div>
+</div>
+<div class="framework">
+            <span class="framework-label">3️⃣ ЗВИЧКА</span>
+<div class="framework-item">Правило "3 секунди" — Перед кожним новим тестом 3 секунди подумати: "Це в scope?"</div>
+<div class="framework-item">"Блокер = СТОП" — Як тільки натрапив на блокер — записати, повідомити, зупинитись</div>
+</div>
+<h3>🛠️ Інструменти</h3>
+<div class="tools">
+<span class="tool">Notion/Trello — чек-лист перед початком</span>
+<span class="tool">Slack reminder — нагадування про перевірку scope</span>
+<span class="tool">Timer — 5 хв на читання ТЗ перед стартом</span>
+</div>
+
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- PLAN -->
+    <section class="section">
+        <div class="section-title">План дій</div>
+        <h2>📅 На 3 місяці</h2>
+        
+        <div class="plan-month">
+            <h5>МІСЯЦЬ 1: Фундамент</h5>
+            <p>Оберіть ОДНУ звичку + одну дію з суперсили</p>
+        </div>
+        
+        <div class="plan-month">
+            <h5>МІСЯЦЬ 2: Масштабування</h5>
+            <p>Додайте системні зміни</p>
+        </div>
+        
+        <div class="plan-month">
+            <h5>МІСЯЦЬ 3: Закріплення</h5>
+            <p>Менторство + оцінка прогресу</p>
+        </div>
+        
+        <div class="insight">
+            <h4>🎯 Головне правило</h4>
+            <p><strong>Не намагайтесь виправити все одразу!</strong><br>Оберіть один пункт на місяць.</p>
+        </div>
+    </section>
+
+    <!-- CONCLUSION -->
+    <section class="section">
+        <div class="section-title">Висновок</div>
+        <h2>📝 Що далі?</h2>
+        
+        <ul class="checklist">
+            <li>Виберіть 1-2 дії з рекомендацій</li>
+            <li>Через місяць обговоріть з керівником</li>
+            <li>Попросіть зворотний зв'язок у колег</li>
+        </ul>
+        
+        <div class="insight" style="margin-top:24px;">
+            <h4>💫 Пам'ятайте</h4>
+            <p>Ваші суперсили — фундамент.<br>Зони розвитку — тонка настройка, не перебудова.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="big">Now you know how. 🎯</div>
+        <div class="small">Команда вірить у вас</div>
+    </footer>
+
+    <!-- Scroll to top -->
+    <div class="scroll-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</div>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const btn = document.querySelector('.scroll-top');
+            btn.classList.toggle('visible', window.scrollY > 500);
+        });
+    </script>
+
+</body>
+</html>
