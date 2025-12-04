@@ -17,6 +17,13 @@
             -webkit-tap-highlight-color: transparent;
         }
         
+        img,
+        svg,
+        video {
+            max-width: 100%;
+            height: auto;
+        }
+        
         :root {
             --yellow: #FAEE02;
             --cyan: #00BCD4;
@@ -50,6 +57,15 @@
             padding-bottom: 80px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        html {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
         }
         
         /* ===== SITE HEADER (Fixed) ===== */
@@ -683,6 +699,373 @@
             font-size: var(--font-base);
             color: var(--text-light);
             font-weight: 400;
+        }
+        
+        /* ===== RESPONSIVE STYLES ===== */
+        @media (max-width: 768px) {
+            /* Типографика для планшетов */
+            :root {
+                --font-xs: 9px;
+                --font-base: 15px;
+                --font-md: 24px;
+                --font-lg: 38px;
+                --font-xl: 62px;
+                --font-2xl: 100px;
+            }
+            
+            /* Фиксированный header */
+            .site-header-left,
+            .site-header-right {
+                font-size: 18px;
+            }
+            
+            .site-header-left {
+                margin-top: 12px;
+                margin-left: 12px;
+            }
+            
+            .site-header-right {
+                margin-top: 12px;
+                margin-right: 12px;
+            }
+            
+            /* Основной header */
+            .header {
+                padding: 60px 20px 40px;
+            }
+            
+            .header-title {
+                font-size: var(--font-2xl);
+            }
+            
+            /* Звездочка */
+            .header .star {
+                width: 280px;
+                height: 280px;
+                margin: 24px auto;
+            }
+            
+            /* Заголовок после звездочки */
+            .header-title-after-star {
+                font-size: 24px;
+                margin: 24px 0 0 0;
+            }
+            
+            .header .name {
+                margin-top: 24px;
+                font-size: 15px;
+                padding: 10px 24px;
+            }
+            
+            /* Секции */
+            .section {
+                margin: 24px 16px;
+                padding: 32px 24px;
+                border-radius: 20px;
+            }
+            
+            .section h2 {
+                font-size: var(--font-lg);
+            }
+            
+            .section h3 {
+                font-size: var(--font-md);
+            }
+            
+            /* Радар-чарт */
+            .radar-container {
+                padding: 24px 16px;
+                margin: 24px 0;
+            }
+            
+            .radar-container svg {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+            }
+            
+            /* Карточки */
+            .superpower,
+            .growth {
+                padding: 24px;
+                margin: 20px 0;
+            }
+            
+            .superpower h4,
+            .growth h4 {
+                font-size: var(--font-md);
+            }
+            
+            .superpower .percent {
+                font-size: var(--font-xl);
+            }
+            
+            /* Цитаты */
+            .quote {
+                padding: 20px 24px;
+                font-size: var(--font-base);
+            }
+            
+            /* Insight */
+            .insight {
+                padding: 32px 24px;
+                margin: 24px 0;
+            }
+            
+            .insight p {
+                font-size: var(--font-md);
+            }
+            
+            /* Axis highlight */
+            .axis-highlight {
+                padding: 32px 24px;
+                margin: 24px 0;
+            }
+            
+            .axis-highlight .value {
+                font-size: var(--font-xl);
+            }
+            
+            /* Footer */
+            .footer {
+                padding: 60px 20px;
+            }
+            
+            .footer .big {
+                font-size: var(--font-xl);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Мобильные устройства */
+            :root {
+                --font-xs: 8px;
+                --font-base: 14px;
+                --font-md: 22px;
+                --font-lg: 36px;
+                --font-xl: 58px;
+                --font-2xl: 94px;
+            }
+            
+            /* Фиксированный header */
+            .site-header-left,
+            .site-header-right {
+                font-size: 16px;
+            }
+            
+            .site-header-left {
+                margin-top: 12px;
+                margin-left: 12px;
+            }
+            
+            .site-header-right {
+                margin-top: 12px;
+                margin-right: 12px;
+            }
+            
+            /* Основной header */
+            .header {
+                padding: 40px 16px 32px;
+            }
+            
+            .header-title {
+                font-size: var(--font-2xl);
+                letter-spacing: -3px;
+            }
+            
+            /* Звездочка - еще меньше для мобильных */
+            .header .star {
+                width: 200px;
+                height: 200px;
+                margin: 20px auto;
+            }
+            
+            /* Заголовок после звездочки */
+            .header-title-after-star {
+                font-size: 20px;
+                margin: 20px 0 0 0;
+            }
+            
+            .header .name {
+                margin-top: 20px;
+                font-size: 14px;
+                padding: 8px 20px;
+            }
+            
+            .header .meta {
+                margin-top: 16px;
+                font-size: 10px;
+            }
+            
+            /* Секции */
+            .section {
+                margin: 16px 12px;
+                padding: 24px 20px;
+                border-radius: 16px;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            /* Предотвращение переполнения */
+            h1, h2, h3, h4, h5, h6, p, div, span {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .section-title {
+                font-size: var(--font-xs);
+            }
+            
+            .section h2 {
+                font-size: var(--font-lg);
+                margin-bottom: 20px;
+            }
+            
+            .section h3 {
+                font-size: var(--font-md);
+                margin: 32px 0 12px;
+            }
+            
+            .section p {
+                font-size: var(--font-base);
+            }
+            
+            /* Радар-чарт */
+            .radar-container {
+                padding: 20px 12px;
+                margin: 20px 0;
+            }
+            
+            /* Карточки */
+            .superpower,
+            .growth {
+                padding: 20px;
+                margin: 16px 0;
+            }
+            
+            .superpower .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .superpower h4,
+            .growth h4 {
+                font-size: var(--font-md);
+                margin-bottom: 8px;
+            }
+            
+            .superpower .percent {
+                font-size: var(--font-xl);
+                margin-top: 8px;
+            }
+            
+            /* Intro boxes */
+            .intro-box {
+                padding: 24px;
+                margin: 20px 0;
+            }
+            
+            .intro-box h4 {
+                font-size: var(--font-md);
+            }
+            
+            /* Цитаты */
+            .quote {
+                padding: 16px 20px;
+                font-size: var(--font-base);
+            }
+            
+            /* Insight */
+            .insight {
+                padding: 24px 20px;
+                margin: 20px 0;
+            }
+            
+            .insight h4 {
+                font-size: var(--font-xs);
+            }
+            
+            .insight p {
+                font-size: var(--font-md);
+            }
+            
+            /* Framework */
+            .framework-item {
+                padding: 16px 20px;
+                margin: 10px 0;
+                font-size: var(--font-base);
+            }
+            
+            /* Tools */
+            .tool {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            
+            /* Axis items */
+            .axis-item {
+                padding: 16px 0;
+            }
+            
+            .axis-num {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+                margin-right: 12px;
+            }
+            
+            .axis-name {
+                font-size: var(--font-md);
+            }
+            
+            .axis-stats {
+                font-size: 14px;
+            }
+            
+            /* Axis highlight */
+            .axis-highlight {
+                padding: 24px 20px;
+                margin: 20px 0;
+            }
+            
+            .axis-highlight .value {
+                font-size: var(--font-xl);
+                margin: 8px 0;
+            }
+            
+            /* Checklist */
+            .checklist li {
+                padding: 16px 0;
+                font-size: var(--font-base);
+            }
+            
+            /* Plan */
+            .plan-month {
+                padding: 24px;
+                margin: 12px 0;
+            }
+            
+            /* Footer */
+            .footer {
+                padding: 40px 16px;
+            }
+            
+            .footer .big {
+                font-size: var(--font-xl);
+            }
+            
+            .footer .small {
+                font-size: var(--font-base);
+            }
+            
+            /* Scroll to top */
+            .scroll-top {
+                width: 48px;
+                height: 48px;
+                bottom: 20px;
+                right: 20px;
+                font-size: var(--font-md);
+            }
         }
     </style>
 </head>
